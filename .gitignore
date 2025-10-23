@@ -1,0 +1,55 @@
+# ===================================
+# Node.js Backend (Express + Swagger + Cloudinary + MongoDB)
+# ===================================
+
+# --- Dependencias ---
+node_modules/
+
+# --- Archivos de entorno ---
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Cache ---
+.cache/
+.tmp/
+temp/
+tmp/
+
+# --- Swagger (autogenerado o temporal) ---
+swagger-output.json
+swagger.json
+
+# --- Archivos de subida temporales ---
+uploads/
+public/uploads/
+tmp_uploads/
+
+# --- Archivos generados por Cloudinary ---
+# (Cloudinary sube archivos a la nube, pero evita guardar copias locales)
+cloudinary_temp/
+cloudinary_cache/
+
+# --- Cobertura de tests ---
+coverage/
+.nyc_output/
+
+# --- IDEs / Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# --- Sistema operativo --
+
