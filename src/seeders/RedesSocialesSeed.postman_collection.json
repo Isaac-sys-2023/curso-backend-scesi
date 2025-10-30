@@ -1,0 +1,329 @@
+{
+    "info": {
+        "name": "Seed Redes Sociales - Local",
+        "_postman_id": "8f321c8a-9b2e-44b8-b33e-6ef46fdb4321",
+        "description": "Colección para crear redes sociales con Cloudinary usando el flujo real del backend en http://localhost:4000/api",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:4000/api"
+        },
+        {
+            "key": "token",
+            "value": ""
+        }
+    ],
+    "item": [
+        {
+            "name": "1️⃣ Login Admin",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n \"email\": \"admin@tuapp.com\",\n \"password\": \"Admin123!\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/auth/login",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "auth",
+                        "login"
+                    ]
+                }
+            },
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "const jsonData = pm.response.json();",
+                            "if (jsonData.token) {",
+                            " pm.collectionVariables.set('token', jsonData.token);",
+                            " console.log('✅ Token guardado en variable de colección');",
+                            "} else {",
+                            " console.log('⚠️ No se encontró token en la respuesta');",
+                            "}"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2️⃣ Crear Red Social - Facebook",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "facebook",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/facebook.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - Github",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "github",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/github.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - Linkedin",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "linkedin",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/linkedin.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - Instagram",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "instagram",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/instagram.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - TikTok",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "tik-tok",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/tik-tok.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - Twitter",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "twitter",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/twitter.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Crear Red Social - YouTube",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{token}}"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "nombre",
+                            "value": "youtube",
+                            "type": "text"
+                        },
+                        {
+                            "key": "img",
+                            "type": "file",
+                            "src": [
+                                "./redes-sociales/youtube.png"
+                            ]
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{base_url}}/redes",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "redes"
+                    ]
+                }
+            }
+        }
+    ]
+}

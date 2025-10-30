@@ -28,13 +28,25 @@ export const register = async (req, res) => {
     // URL de Cloudinary si se subió imagen
     const imagenUrl = req.file?.path || "";
 
+    const fechaParseada = new Date(fechaNacimiento);
+
+    let redes = [];
+    if (rest.redes) {
+      try {
+        redes = JSON.parse(req.body.redes);
+      } catch (err) {
+        console.error("Error al parsear redes:", err);
+      }
+    }
+    
     const userData = {
       nombre,
       apellidos,
       email,
       password: hash,
       rol,
-      fechaNacimiento,
+      // fechaNacimiento,
+      fechaNacimiento: fechaParseada,
       imagen: imagenUrl,
     };
 
@@ -50,7 +62,7 @@ export const register = async (req, res) => {
           .json({ msg: "Las redes son requeridas para tutores" });
 
       userData.descripcion = rest.descripcion || "";
-      userData.redes = rest.redes;
+      userData.redes = redes;
     }
 
     if (rol === "estudiante") {
