@@ -54,6 +54,18 @@ export const updateUser = async (req, res) => {
 
     const updates = req.body;
 
+    if (typeof updates.redes === "string") {
+      try {
+        updates.redes = JSON.parse(updates.redes);
+      } catch {
+        return res.status(400).json({ msg: "Formato inválido en redes" });
+      }
+    }
+
+    if (req.file && req.file.path) {
+      updates.imagen = req.file.path;
+    }
+
     // Validaciones por rol
     if (user.rol === "tutor") {
       if (updates.redes && updates.redes.length === 0)

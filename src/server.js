@@ -16,7 +16,7 @@ const app = express();
 app.use(
   cors({
     origin: "*", // permite cualquier origen (solo para pruebas)
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST","PATCH","OPTIONS", "PUT", "DELETE"],
   })
 );
 app.use(express.json());
