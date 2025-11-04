@@ -1,10 +1,31 @@
 import User from "../models/User.js";
-import Curso from "../models/Curso.js";
 import cloudinary from "../config/cloudinary.js";
 
 export const listUsers = async (req, res) => {
-  const users = await User.find().select("-password");
-  res.json(users);
+  const users = await User.find().select("-password").lean();
+
+  const filtered = users.map(user => {
+    if (user.rol === "admin") {
+      delete user.redes;
+      delete user.tareasUrl;
+      delete user.tipoEstudiante;
+      delete user.descripcion;
+      if (!user.imagen) delete user.imagen;
+    } else if (user.rol === "tutor") {
+      delete user.tareasUrl;
+      delete user.tipoEstudiante;
+      if (!user.imagen) delete user.imagen;
+      if (!user.descripcion) delete user.descripcion;
+    } else if (user.rol === "estudiante") {
+      delete user.descripcion;
+      if (!user.redes) delete user.redes;
+      if (!user.imagen) delete user.imagen;
+      if (!user.tareasUrl) delete user.tareasUrl;
+    }
+    return user;
+  });
+
+  res.json(filtered);
 };
 
 export const getUser = async (req, res) => {
@@ -26,12 +47,18 @@ export const getUser = async (req, res) => {
       delete data.redes;
       delete data.tareasUrl;
       delete data.tipoEstudiante;
+      delete data.descripcion;
+      if (!data.imagen) delete data.imagen;
     } else if (data.rol === "tutor") {
       delete data.tareasUrl;
       delete data.tipoEstudiante;
+      if (!data.imagen) delete data.imagen;
+      if (!data.descripcion) delete data.descripcion;
     } else if (data.rol === "estudiante") {
       delete data.descripcion;
-      delete data.redes; // opcional, ya que solo algunos estudiantes la tendrán
+      if (!data.redes) delete data.redes;
+      if (!data.imagen) delete data.imagen;
+      if (!data.tareasUrl) delete data.tareasUrl;
     }
 
     res.json(data);
